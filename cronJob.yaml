@@ -1,0 +1,53 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: gotccha
+spec:
+  jobTemplate:
+    metadata:
+      name: gotccha
+    spec:
+      template:
+        spec:
+          containers:
+            - image: codeceptjs/codeceptjs
+              name: gotccha
+              args:
+                - /tmp/scripts/run.sh
+              volumeMounts:
+                - name: scripts
+                  mountPath: /tmp/scripts
+              env:
+                - name: ANA_CUSNUM
+                  valueFrom:
+                    secretKeyRef:
+                      name: ana-secrets
+                      key: ANA_CUSNUM
+                - name: ANA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: ana-secrets
+                      key: ANA_PASSWORD
+          restartPolicy: Never
+          volumes:
+            - name: scripts
+              configMap:
+                name: gotccha
+                defaultMode: 0755
+
+  schedule: 0 10 * * *
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gotccha
+data:
+  run.sh: |
+    set -e
+
+    git clone https://github.com/tk3fftk/gotccha.git
+    cd gotccha
+    npm i
+    npm run codeceptjs
