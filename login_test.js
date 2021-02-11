@@ -2,7 +2,14 @@
 
 Feature('ANA gotccha');
 
-Scenario('do gotccha', ({ I }) => {
+const gotcchaList = [
+  'ANA SKY コイン',
+  'テイラースティッチ',
+  'ANAショッピング A-style',
+  'ANA SKY コインSP',
+];
+
+Scenario('do gotccha', async ({ I }) => {
   I.amOnPage('');
   I.see('ANA スカイ ガッチャ!モール');
   I.click('.btn-text');
@@ -15,17 +22,20 @@ Scenario('do gotccha', ({ I }) => {
   // 同意
   I.click('同意する');
 
-  // マイリストからガチャページに飛ぶ
-  I.click('ANA SKY コイン');
-  // ガチャを回す処理
-
-  I.amOnPage('https://ana-jp.gotchamall.com/');
-  I.click('テイラースティッチ');
-  // ガチャを回す処理
-
-  I.amOnPage('https://ana-jp.gotchamall.com/');
-  I.click('ANAショッピング A-style');
-  // ガチャを(ry
+  for (let g of gotcchaList) {
+    I.click(g);
+    // 通常ガチャ
+    await tryTo(() => {
+      I.click('1日1回チャレンジ！');
+      I.waitForElement('.cp_get_cpimg', 15);
+    });
+    // SPガチャ
+    await tryTo(() => {
+      I.click('PLAY');
+      I.waitForElement('.cp_get_cpimg', 15);
+    });
+    I.amOnPage('https://ana-jp.gotchamall.com/');
+  }
 
   I.wait(2);
 });
