@@ -2,12 +2,13 @@
 
 Feature('ANA gotccha');
 
-const gotcchaList = [
+const normalGotcchaList = [
   'ANA SKY コイン',
   'テイラースティッチ',
   'ANAショッピング A-style',
-  'ANA SKY コインSP',
 ];
+
+const spGotcchaList = ['ANA SKY コインSP'];
 
 Scenario('do gotccha', async ({ I }) => {
   I.amOnPage('');
@@ -22,15 +23,18 @@ Scenario('do gotccha', async ({ I }) => {
   // 同意
   I.click('同意する');
 
-  for (let g of gotcchaList) {
+  for (let g of normalGotcchaList) {
     I.click(g);
-    // 通常ガチャ
     await tryTo(() => {
       I.click('1日1回チャレンジ！');
       I.waitForElement('.cp_get_cpimg', 15);
     });
-    // SPガチャ
+    I.amOnPage('https://ana-jp.gotchamall.com/');
+  }
+
+  for (let g of spGotcchaList) {
     await tryTo(() => {
+      I.click(g);
       I.click('PLAY');
       I.waitForElement('.cp_get_cpimg', 15);
     });
