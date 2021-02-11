@@ -11,7 +11,7 @@ exports.config = {
     Playwright: {
       url:
         'https://www.ana.co.jp/ja/jp/amc/ana_sky_gotchamall/?from=amc_app_info',
-      show: true,
+      show: false,
       browser: 'chromium',
       waitForNavigation: 'load',
       userAgent:
