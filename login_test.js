@@ -8,7 +8,7 @@ const normalGotcchaList = [
   'ANAショッピング A-style',
 ];
 
-const spGotcchaList = ['ANA SKY コインSP'];
+const spGotcchaList = ['ANA SKY コインSP', 'テイラースティッチSP'];
 
 Scenario('do gotccha', async ({ I }) => {
   I.amOnPage('');
