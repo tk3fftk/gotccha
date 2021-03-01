@@ -4,11 +4,11 @@ Feature('ANA gotccha');
 
 const normalGotcchaList = [
   'ANA SKY コイン',
-  'テイラースティッチ',
   'ANAショッピング A-style',
+  '京橋ワイン',
 ];
 
-const spGotcchaList = ['ANA SKY コインSP', 'テイラースティッチSP'];
+const spGotcchaList = ['ANA SKY コインSP'];
 
 Scenario('do gotccha', async ({ I }) => {
   I.amOnPage('');
