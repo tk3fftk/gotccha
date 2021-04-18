@@ -1,4 +1,7 @@
 ```
+# run locally on Windows
+PowerShell -ExecutionPolicy Bypass .\local.ps1
+
 # setup kind
 kind create cluster
 

@@ -1,4 +1,4 @@
 node_modules
 output
 .vscode
-*.ps1
+run.ps1
