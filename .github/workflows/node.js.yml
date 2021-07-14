@@ -25,3 +25,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run codeceptjs
+      env:
+        ANA_CUSNUM: ${{ secrets.ANA_CUSNUM }}
+        ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
