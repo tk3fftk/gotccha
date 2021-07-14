@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "codeceptjs": "codeceptjs run --debug"
+        "codeceptjs": "codeceptjs run"
     },
     "devDependencies": {
         "@codeceptjs/configure": "^0.6.2",
